@@ -76,6 +76,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
     refreshBtn.addEventListener('click', fetchAttractions);
 
+    // --- Modal & Form Logic ---
+    const buyBtn = document.getElementById('buy-ticket-btn');
+    const modal = document.getElementById('ticket-modal');
+    const closeBtn = document.querySelector('.close-btn');
+    const ticketForm = document.getElementById('ticket-form');
+    const formStatus = document.getElementById('form-status');
+
+    buyBtn.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+        formStatus.textContent = '';
+        formStatus.className = 'status-msg';
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+
+    ticketForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        formStatus.textContent = "Processing...";
+        formStatus.className = "status-msg";
+        
+        const customerID = parseInt(document.getElementById('customerId').value);
+        const accessLevel = parseInt(document.getElementById('accessLevel').value);
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+
+        const payload = { customerID, accessLevel, startDate, endDate };
+
+        try {
+            const response = await fetch('/coasters/TicketServlet', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.status === 201 || response.ok) {
+                formStatus.textContent = "Ticket purchased successfully!";
+                formStatus.className = "status-msg success";
+                ticketForm.reset();
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 2000);
+            } else {
+                formStatus.textContent = "Failed to purchase ticket. Error code: " + response.status;
+                formStatus.className = "status-msg error";
+            }
+        } catch (err) {
+            formStatus.textContent = "Network error. Please try again.";
+            formStatus.className = "status-msg error";
+        }
+    });
+
     // Initial fetch
     fetchAttractions();
 });
