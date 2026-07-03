@@ -5,9 +5,9 @@ metadata:
   name: db-credentials
 type: Opaque
 stringData:
-  url: jdbc:postgresql://revdemo.cmyaylobpmky.us-east-2.rds.amazonaws.com:5432/postgres
-  username: voldemort
-  password: password
+  DB_URL: <YOUR_DB_URL_HERE>
+  DB_USERNAME: <YOUR_DB_USERNAME_HERE>
+  DB_PASSWORD: <YOUR_DB_PASSWORD_HERE>
 ---
 # cm Deployment
 apiVersion: apps/v1

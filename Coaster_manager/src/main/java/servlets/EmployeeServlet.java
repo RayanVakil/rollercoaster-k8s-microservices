@@ -6,10 +6,10 @@ import data.SQLDatabaseEmployees;
 import models.Employee;
 import utils.PostgresConnectionUtil;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -76,6 +76,7 @@ public class EmployeeServlet extends HttpServlet {//Start of EmployeeServlet Cla
             }//End of try
             catch(Exception e){//Start of catch
                 e.printStackTrace();
+                resp.setStatus(400);
             }//End of catch
         }//End of else if statement
     }//End of doGet method
@@ -119,6 +120,7 @@ public class EmployeeServlet extends HttpServlet {//Start of EmployeeServlet Cla
             }//End of try
             catch (Exception e) {//Start of catch
                 e.printStackTrace();
+                resp.setStatus(400);
             }//End of catch
         }//End of first if statement
         else if (data.get("add").getAsString().equals("login")) {//Start of first else if statement
@@ -150,6 +152,7 @@ public class EmployeeServlet extends HttpServlet {//Start of EmployeeServlet Cla
             }//End of try
             catch (Exception e) {//Start of catch
                 e.printStackTrace();
+                resp.setStatus(400);
                 Map<String, String> options = new LinkedHashMap<>();
                 options.put("message", "The email entered doesn't match our records.");
                 json = new Gson().toJson(options);
@@ -198,6 +201,7 @@ public class EmployeeServlet extends HttpServlet {//Start of EmployeeServlet Cla
             }//End of try
             catch (Exception e) {//Start of catch
                 e.printStackTrace();
+                resp.setStatus(400);
             }//End of catch
         }//End of if statement
     }//End of doPut method
@@ -235,6 +239,7 @@ public class EmployeeServlet extends HttpServlet {//Start of EmployeeServlet Cla
             }//End of try
             catch (Exception e) {//Start of catch
                 e.printStackTrace();
+                resp.setStatus(400);
             }//End of catch
         }//End of if statement
     }//End of doDelete

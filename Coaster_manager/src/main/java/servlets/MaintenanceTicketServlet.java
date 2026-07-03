@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import data.SQLDatabaseMaintenance_Ticket;
 import dto.MaintenanceTicketTransfer;
@@ -35,7 +36,7 @@ public class MaintenanceTicketServlet extends HttpServlet {//Start of Maintenanc
 //Instance Variables
 	Maintenance_Ticket maintenance_ticket = new Maintenance_Ticket();
 	SQLDatabaseMaintenance_Ticket sqlDatabaseMaintenance_ticket = new SQLDatabaseMaintenance_Ticket(new PostgresConnectionUtil());
-	private static Logger LOG = Logger.getLogger(MaintenanceTicketServlet.class);
+	private static final Logger LOG = LoggerFactory.getLogger(MaintenanceTicketServlet.class);
 
 //Methods
 
@@ -128,17 +129,7 @@ public class MaintenanceTicketServlet extends HttpServlet {//Start of Maintenanc
 		}//End of first else statement
 	}//End doGet method
 
-    /**
-     * Not implemented
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-      @Override
-     protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doHead(req, resp);
-     }
+
 
         /*
          * Requried JSON for addition
@@ -223,32 +214,4 @@ public class MaintenanceTicketServlet extends HttpServlet {//Start of Maintenanc
         }//End of else statement
      }//End of doPut method
 
-    /**
-     * Unimplemented doDelete
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-     @Override
-     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
-     }
-
-    /**
-     * Unimplemented destroy
-     */
-    @Override
-     public void destroy() {
-        super.destroy();
-     }
-
-    /**
-     * Unimplemented init
-     * @throws ServletException
-     */
-    @Override
-     public void init() throws ServletException {
-        super.init();
-     }
 }//End of MaintenanceTicketServlet

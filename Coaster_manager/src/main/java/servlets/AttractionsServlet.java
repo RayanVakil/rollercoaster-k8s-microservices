@@ -6,10 +6,10 @@ import data.SQLDatabaseExtAttractions;
 import data.SQLDatabaseIntAttraction;
 import models.Attraction;
 import utils.PostgresConnectionUtil;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -67,6 +67,7 @@ public class AttractionsServlet extends HttpServlet {
                 }//End of second try
                 catch (Exception e){//Start of second catch
                     e.printStackTrace();
+                resp.setStatus(400);
                 }//End of second catch
 
                     options.put("name",(String.valueOf(attraction.getName())));
@@ -84,6 +85,7 @@ public class AttractionsServlet extends HttpServlet {
 
             catch (Exception e){//Start of first catch
                 e.printStackTrace();
+                resp.setStatus(400);
             }//End of catch
 
         }//End of first if statement
@@ -164,6 +166,7 @@ public class AttractionsServlet extends HttpServlet {
 
             catch (Exception e){//Start of catch statement
                 e.printStackTrace();
+                resp.setStatus(400);
             }//End of catch statement
 
         }//End of first if statement
@@ -210,6 +213,7 @@ public class AttractionsServlet extends HttpServlet {
 
             catch (Exception e){//Start of catch statement
                 e.printStackTrace();
+                resp.setStatus(400);
             }//End of catch statement
         }//End of first if statement
 

@@ -6,10 +6,10 @@ import models.Attraction;
 import utils.ConnectionUtils;
 import utils.PostgresConnectionUtil;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -63,7 +63,7 @@ public class AttractionsServlet extends HttpServlet
                 try
                 {
                     String json = null;
-                    Attraction temp = repo.findById(new Integer(req.getHeader("find")));
+                    Attraction temp = repo.findById(Integer.parseInt(req.getHeader("find")));
                     Map<String, Attraction> options = new LinkedHashMap<>();
                     options.put("attraction", temp);
                     //System.out.println(options);
@@ -75,76 +75,15 @@ public class AttractionsServlet extends HttpServlet
                 catch (NumberFormatException e)
                 {
                     e.printStackTrace();
+                resp.setStatus(400);
                 }
                 catch (IOException e)
                 {
                     e.printStackTrace();
+                resp.setStatus(400);
                 }
             }
         }
     }
-
-    /**
-     * Not implemented
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doHead(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doHead(req, resp);
-    }
-
-    /**
-     * Not Implemented
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
-    }
-
-    /**
-     * Not Implemented
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
-    }
-
-    /**
-     * Not implemented
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
-    }
-    /**
-     * Not implemented
-     */
-    @Override
-    public void destroy() {
-        super.destroy();
-    }
-    /**
-     * Not implemented
-     */
-    @Override
-    public void init() throws ServletException {
-        super.init();
-    }
-
 
 }

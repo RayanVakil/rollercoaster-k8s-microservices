@@ -31,9 +31,9 @@ public class PostgresConnectionUtil extends ConnectionUtil {
 
 //Constructors
     public PostgresConnectionUtil() {
-        this.url = System.getenv("url");
-        this.username = System.getenv("username");
-        this.password= System.getenv("password");
+        this.url = System.getenv("DB_URL");
+        this.username = System.getenv("DB_USERNAME");
+        this.password= System.getenv("DB_PASSWORD");
         defaultSchema = "project2";
     }
     //Removed unneeded Constructor, no more hardcoding url password or UN
