@@ -1,3 +1,0 @@
-your whole job is to audit this project, not change any code and grade it from 1-100.  This is just supposed to showcase to recruiters i know how to use docker, kubernetes, AWS, and Java well.
-
-its not supposed to be some serious project we put into production.  append to audit.md what we can change so recuiters for ai engeering positions see this project and are impressed and want to hire me.  but dont suggest something that will take days to implement.   

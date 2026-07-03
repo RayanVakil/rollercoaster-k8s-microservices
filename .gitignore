@@ -1,6 +1,7 @@
 # Gemini / Agent Files
 GEMINI.md
 audit.md
+CLAUDE.md
 
 # Secrets & Local Env
 jdbcConnectiEnvVars.txt
