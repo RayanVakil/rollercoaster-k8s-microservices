@@ -78,16 +78,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Modal & Form Logic ---
     const buyBtn = document.getElementById('buy-ticket-btn');
+    const navTicketsBtn = document.getElementById('nav-tickets-btn');
     const modal = document.getElementById('ticket-modal');
     const closeBtn = document.querySelector('.close-btn');
     const ticketForm = document.getElementById('ticket-form');
     const formStatus = document.getElementById('form-status');
 
-    buyBtn.addEventListener('click', () => {
+    const openModal = () => {
         modal.classList.remove('hidden');
         formStatus.textContent = '';
         formStatus.className = 'status-msg';
-    });
+    };
+
+    buyBtn.addEventListener('click', openModal);
+    if (navTicketsBtn) {
+        navTicketsBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+    }
 
     closeBtn.addEventListener('click', () => {
         modal.classList.add('hidden');
