@@ -1,25 +1,17 @@
-# start with the alpine linux tomcat image
-FROM tomcat:8.5-jdk8-openjdk
+# Stage 1: Build the application
+FROM maven:3.8-jdk-8 AS builder
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+# Build the WAR file, skipping tests to speed up the build
+RUN mvn clean package -DskipTests
 
-# switch to the CATALINA_HOME directory
+# Stage 2: Run the application
+FROM tomcat:8.5-jdk8-openjdk
 WORKDIR $CATALINA_HOME
 
-ENV url=jdbc:postgresql://revdemo.cmyaylobpmky.us-east-2.rds.amazonaws.com:5432/postgres
-ENV username=voldemort
-ENV password=password
+# Copy the built WAR from the builder stage
+COPY --from=builder /app/target/*.war ./webapps/ROOT.war
 
-# create a reference to some file on the physical machine (optional)
-ARG WAR_FILE=./target/*.war
-
-# copy the file from the physical machine to the webapps dir in the PWD
-COPY $WAR_FILE ./webapps/ROOT.war
-
-# EXPOSE port 8080
 EXPOSE 8080
-
-# execute this command to start tomcat
 CMD ["catalina.sh", "run"]
-
-
-
-# image creation complete

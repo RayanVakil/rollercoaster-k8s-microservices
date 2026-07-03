@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: CustomerTests
--------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s - in CustomerTests
-=======
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.161 s - in CustomerTests
->>>>>>> a2110d0d94c3224a8a7497a7a2cb235abf7808bc

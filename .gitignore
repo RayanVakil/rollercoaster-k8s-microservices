@@ -1,0 +1,28 @@
+# Gemini / Agent Files
+GEMINI.md
+audit.md
+
+# Secrets & Local Env
+jdbcConnectiEnvVars.txt
+jdbcConnectiEnvVars - Copy.txt
+
+# Binaries & Executables
+minikube
+minikube-linux-amd64
+
+# Temp Files
+~*.tmp
+~$*.docx
+
+# Maven
+target/
+*.war
+*.jar
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# Coverage
+Coverage_Report/

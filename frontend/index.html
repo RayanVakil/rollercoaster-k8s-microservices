@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RollerCoasterPark</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+    
+    <header class="glass-nav">
+        <div class="nav-content">
+            <h1 class="logo">RollerCoaster<span>Park</span></h1>
+            <nav>
+                <a href="#" class="active">Attractions</a>
+                <a href="#">Tickets</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Experience the Thrill</h2>
+            <p>Discover our world-class attractions and book your next adventure.</p>
+        </section>
+
+        <section class="attractions-section">
+            <div class="section-header">
+                <h3>Our Attractions</h3>
+                <button id="refresh-btn" class="btn-primary">Refresh</button>
+            </div>
+            
+            <div id="loading" class="loading">Loading thrills...</div>
+            <div id="error-message" class="error hidden">Failed to load attractions. Please try again.</div>
+            
+            <div id="attractions-grid" class="grid hidden">
+                <!-- Javascript will populate this -->
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

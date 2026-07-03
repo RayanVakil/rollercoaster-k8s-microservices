@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: TicketTests
--------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.058 s - in TicketTests
-=======
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.116 s - in TicketTests
->>>>>>> a2110d0d94c3224a8a7497a7a2cb235abf7808bc
