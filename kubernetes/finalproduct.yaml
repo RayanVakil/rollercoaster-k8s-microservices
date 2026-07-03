@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
         - name: coasterm
-          image: jeanaldoph/voldemort:cm
+          image: vakilr/coaster-manager:latest
           ports:
             - containerPort: 8080
           env:
@@ -70,7 +70,7 @@ spec:
     spec:
       containers:
         - name: coasterc
-          image: jeanaldoph/voldemort:cc
+          image: vakilr/coaster-customer:latest
           ports:
             - containerPort: 8080
           envFrom:
@@ -207,7 +207,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: jeanaldoph/voldemort:frontend
+          image: vakilr/coaster-frontend:latest
           ports:
             - containerPort: 80
           resources:
