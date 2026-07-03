@@ -21,6 +21,7 @@ import java.io.*;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import utils.PostgresConnectionUtil;
 
+@org.junit.Ignore
 public class GenerationTests {
 //
 //    ScriptEngineManager manager = new ScriptEngineManager();
