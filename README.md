@@ -38,6 +38,25 @@ A modern, cloud-native, microservices-based web application designed to manage t
 
 ## 🏗️ Architecture
 
+```mermaid
+graph TD
+    User([User / Browser])
+    
+    subgraph Kubernetes Cluster
+        Nginx[Frontend Server <br/> Port 80]
+        CustomerAPI[Customer Service <br/> Java 21 / Port 8080]
+        ManagerAPI[Manager Service <br/> Java 21 / Port 8888]
+        DB[(PostgreSQL Database)]
+    end
+    
+    User -->|HTTP| Nginx
+    Nginx -->|API Calls| CustomerAPI
+    Nginx -->|API Calls| ManagerAPI
+    
+    CustomerAPI -->|JDBC| DB
+    ManagerAPI -->|JDBC| DB
+```
+
 1. **Frontend / Nginx**: Serves the static assets and handles caching.
 2. **Customer API**: Listens on port 8080. Handles ticketing, customer registration, and public attraction listings.
 3. **Manager API**: Listens on port 8888. Handles employee operations, maintenance ticket dispatching, and attraction management.

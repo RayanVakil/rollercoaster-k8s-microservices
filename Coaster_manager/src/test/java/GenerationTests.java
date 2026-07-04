@@ -23,6 +23,7 @@ import utils.PostgresConnectionUtil;
 
 @org.junit.Ignore
 public class GenerationTests {
+    private static final Logger logger = LoggerFactory.getLogger(GenerationTests.class);
 //
 //    ScriptEngineManager manager = new ScriptEngineManager();
 //    ScriptEngine engine = manager.getEngineByName("JavaScript");
@@ -44,7 +45,7 @@ public class GenerationTests {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            logger.error("Exception occurred", e);
         }
     }
     @Test
@@ -109,10 +110,10 @@ public class GenerationTests {
 
         } catch (HttpException e) {
             System.err.println("Fatal protocol violation: " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Exception occurred", e);
         } catch (IOException e) {
             System.err.println("Fatal transport error: " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Exception occurred", e);
         } finally {
             // Release the connection.
             method.releaseConnection();

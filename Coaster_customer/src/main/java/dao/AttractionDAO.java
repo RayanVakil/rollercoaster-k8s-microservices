@@ -1,5 +1,8 @@
 package dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import models.Attraction;
 import utils.ConnectionUtils;
 import utils.PostgresConnectionUtil;
@@ -29,7 +32,8 @@ import java.util.List;
  *  @author Paityn Maynard With assistance from: Barthelemy Martinon
  *  @version 19 May 2020
  */
-public class AttractionDAO implements DAO<Attraction,Integer> {//Start of AttractionDAO
+public class AttractionDAO implements DAO<Attraction,Integer> {
+    private static final Logger logger = LoggerFactory.getLogger(to.class);//Start of AttractionDAO
     //Instance Variables
     private static ConnectionUtils connectionUtil;
 
@@ -73,7 +77,7 @@ public class AttractionDAO implements DAO<Attraction,Integer> {//Start of Attrac
             }
         }//End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         return results;
@@ -105,7 +109,7 @@ public class AttractionDAO implements DAO<Attraction,Integer> {//Start of Attrac
             addedRowCount = ps.executeUpdate();
         } //End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         return addedRowCount;
@@ -143,7 +147,7 @@ public class AttractionDAO implements DAO<Attraction,Integer> {//Start of Attrac
             }//End of second try
         }//End of first try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         if(result.getStatus()==null){
@@ -154,7 +158,7 @@ public class AttractionDAO implements DAO<Attraction,Integer> {//Start of Attrac
             result.getStatus();
         }//End of third try
         catch (Exception e){//Start of catch
-            e.printStackTrace();
+            logger.error("Exception occurred", e);
             return null;
         }//End of catch
 
@@ -178,7 +182,7 @@ public class AttractionDAO implements DAO<Attraction,Integer> {//Start of Attrac
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Exception occurred", e);
         }
     }//End of delete method
 

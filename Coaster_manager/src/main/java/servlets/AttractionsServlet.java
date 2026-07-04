@@ -1,5 +1,8 @@
 package servlets;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import data.SQLDatabaseExtAttractions;
@@ -35,6 +38,7 @@ import java.util.Map;
  */
 
 public class AttractionsServlet extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(AttractionsServlet.class);
 //Instance Variables
     JsonObject data;
 
@@ -66,7 +70,7 @@ public class AttractionsServlet extends HttpServlet {
                     }//End of second if statement
                 }//End of second try
                 catch (Exception e){//Start of second catch
-                    e.printStackTrace();
+                    logger.error("Exception occurred", e);
                 resp.setStatus(400);
                 }//End of second catch
 
@@ -84,7 +88,7 @@ public class AttractionsServlet extends HttpServlet {
             }//End of first try
 
             catch (Exception e){//Start of first catch
-                e.printStackTrace();
+                logger.error("Exception occurred", e);
                 resp.setStatus(400);
             }//End of catch
 
@@ -165,7 +169,7 @@ public class AttractionsServlet extends HttpServlet {
             }//End of try statement
 
             catch (Exception e){//Start of catch statement
-                e.printStackTrace();
+                logger.error("Exception occurred", e);
                 resp.setStatus(400);
             }//End of catch statement
 
@@ -212,7 +216,7 @@ public class AttractionsServlet extends HttpServlet {
             }//End of try statement
 
             catch (Exception e){//Start of catch statement
-                e.printStackTrace();
+                logger.error("Exception occurred", e);
                 resp.setStatus(400);
             }//End of catch statement
         }//End of first if statement

@@ -1,5 +1,8 @@
 package servlets;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import data.SQLDatabaseEmployees;
@@ -36,7 +39,8 @@ import java.util.Map;
  * @author Reginald Jefferson
  * @version 05/13/2020
  */
-public class EmployeeServlet extends HttpServlet {//Start of EmployeeServlet Class
+public class EmployeeServlet extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeServlet.class);//Start of EmployeeServlet Class
     /**
      * @param req
      * @param resp
@@ -75,7 +79,7 @@ public class EmployeeServlet extends HttpServlet {//Start of EmployeeServlet Cla
                 resp.getWriter().write(json);
             }//End of try
             catch(Exception e){//Start of catch
-                e.printStackTrace();
+                logger.error("Exception occurred", e);
                 resp.setStatus(400);
             }//End of catch
         }//End of else if statement
@@ -119,7 +123,7 @@ public class EmployeeServlet extends HttpServlet {//Start of EmployeeServlet Cla
                 resp.getWriter().write(json);
             }//End of try
             catch (Exception e) {//Start of catch
-                e.printStackTrace();
+                logger.error("Exception occurred", e);
                 resp.setStatus(400);
             }//End of catch
         }//End of first if statement
@@ -151,7 +155,7 @@ public class EmployeeServlet extends HttpServlet {//Start of EmployeeServlet Cla
                 }//End of second else statement
             }//End of try
             catch (Exception e) {//Start of catch
-                e.printStackTrace();
+                logger.error("Exception occurred", e);
                 resp.setStatus(400);
                 Map<String, String> options = new LinkedHashMap<>();
                 options.put("message", "The email entered doesn't match our records.");
@@ -200,7 +204,7 @@ public class EmployeeServlet extends HttpServlet {//Start of EmployeeServlet Cla
                 resp.getWriter().write(json);
             }//End of try
             catch (Exception e) {//Start of catch
-                e.printStackTrace();
+                logger.error("Exception occurred", e);
                 resp.setStatus(400);
             }//End of catch
         }//End of if statement
@@ -238,7 +242,7 @@ public class EmployeeServlet extends HttpServlet {//Start of EmployeeServlet Cla
                 resp.getWriter().write(json);
             }//End of try
             catch (Exception e) {//Start of catch
-                e.printStackTrace();
+                logger.error("Exception occurred", e);
                 resp.setStatus(400);
             }//End of catch
         }//End of if statement

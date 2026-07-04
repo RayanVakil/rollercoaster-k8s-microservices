@@ -1,5 +1,8 @@
 package data;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +32,8 @@ import utils.ConnectionUtil;
  *  @author
  *  @version May 20,2020
  */
-public class SQLDatabaseMaintenance_Ticket implements GenericDAO<Maintenance_Ticket,Integer> {//Start of SQLDatabaseMaintenance_Ticket
+public class SQLDatabaseMaintenance_Ticket implements GenericDAO<Maintenance_Ticket,Integer> {
+    private static final Logger logger = LoggerFactory.getLogger(SQLDatabaseMaintenance_Ticket.class);//Start of SQLDatabaseMaintenance_Ticket
 //Instance Variables
     private ConnectionUtil connectionUtil;
 
@@ -78,7 +82,7 @@ public class SQLDatabaseMaintenance_Ticket implements GenericDAO<Maintenance_Tic
                 }//End of while loop
         }//End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         return results;
@@ -112,7 +116,7 @@ public class SQLDatabaseMaintenance_Ticket implements GenericDAO<Maintenance_Tic
             addedRowCount = ps.executeUpdate();
         }//End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         return addedRowCount == 1;
@@ -152,7 +156,7 @@ public class SQLDatabaseMaintenance_Ticket implements GenericDAO<Maintenance_Tic
             }//End of second try
         }//End of first try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         return result;
@@ -196,7 +200,7 @@ public class SQLDatabaseMaintenance_Ticket implements GenericDAO<Maintenance_Tic
             }//End of while loop
         }//End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         return results;
@@ -240,7 +244,7 @@ public class SQLDatabaseMaintenance_Ticket implements GenericDAO<Maintenance_Tic
             }//End of while loop
         }//End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         return results;
@@ -273,7 +277,7 @@ public class SQLDatabaseMaintenance_Ticket implements GenericDAO<Maintenance_Tic
             updatedRowCount = ps.executeUpdate();
         }//End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         return updatedRowCount > 0;

@@ -1,5 +1,8 @@
 package data;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import models.Employee;
 import utils.ConnectionUtil;
 import java.sql.Connection;
@@ -21,7 +24,8 @@ import java.util.List;
  * Reginald Jefferson -removed paramenter (sql) in findbyID - ResultSet rs = statement.executeQuery();<br/>
  *                    -updated sql statement for adding employing by removing need to include employeeID.<br/>
  */
-public class SQLDatabaseEmployees implements GenericDAO<Employee,Integer> {//Start of SQLDatabaseEmployees Class
+public class SQLDatabaseEmployees implements GenericDAO<Employee,Integer> {
+    private static final Logger logger = LoggerFactory.getLogger(SQLDatabaseEmployees.class);//Start of SQLDatabaseEmployees Class
 //Instance Variables
     private ConnectionUtil connectionUtil;
     static final String TABLE = ".employees";
@@ -72,7 +76,7 @@ public class SQLDatabaseEmployees implements GenericDAO<Employee,Integer> {//Sta
             }//End of while loop
         }//End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
         return employees;
     }//End of findAll method
@@ -104,7 +108,7 @@ public class SQLDatabaseEmployees implements GenericDAO<Employee,Integer> {//Sta
             rowsAdded = statement.executeUpdate();
         }//End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
         return rowsAdded == 1;
     }//End of add method
@@ -140,7 +144,7 @@ public class SQLDatabaseEmployees implements GenericDAO<Employee,Integer> {//Sta
             }//End of if statement
         }//End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
         return employee;
     }//End of findById method
@@ -174,7 +178,7 @@ public class SQLDatabaseEmployees implements GenericDAO<Employee,Integer> {//Sta
 
         }//End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
         return rowsUpdated > 0;
     }//End of update method
@@ -200,7 +204,7 @@ public class SQLDatabaseEmployees implements GenericDAO<Employee,Integer> {//Sta
             rowsDeleted = statement.executeUpdate();
         }//End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
         return rowsDeleted != 0;
     }//End of remove method

@@ -1,5 +1,8 @@
 package dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,6 +36,7 @@ import utils.PostgresConnectionUtil;
  */
 
 public class TicketDAO implements DAO<Ticket, Integer> {
+    private static final Logger logger = LoggerFactory.getLogger(serves.class);
     // Instance Variables
     private ConnectionUtils connectionUtil;
 
@@ -83,13 +87,13 @@ public class TicketDAO implements DAO<Ticket, Integer> {
                 t = new Ticket(ticketid,customerid,accsslvl,startdate,enddate);
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         } finally {
             if(connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    logger.error("Exception occurred", throwables);
                 }
             }
         }
@@ -125,13 +129,13 @@ public class TicketDAO implements DAO<Ticket, Integer> {
                 ticketList.add(temp);
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         } finally {
             if(connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    logger.error("Exception occurred", throwables);
                 }
             }
         }
@@ -169,13 +173,13 @@ public class TicketDAO implements DAO<Ticket, Integer> {
             saveStatement.setString(4, enddate);
             success = saveStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         } finally {
             if(connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    logger.error("Exception occurred", throwables);
                 }
             }
         }
@@ -214,13 +218,13 @@ public class TicketDAO implements DAO<Ticket, Integer> {
             updateStatement.setInt(5, integer);
             updateStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         } finally {
             if(connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    logger.error("Exception occurred", throwables);
                 }
             }
         }

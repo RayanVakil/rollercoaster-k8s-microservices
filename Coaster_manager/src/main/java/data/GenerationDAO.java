@@ -1,5 +1,8 @@
 package data;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import models.Attraction;
 import models.Customer;
@@ -24,6 +27,7 @@ import java.util.*;
 import java.time.LocalDateTime;
 
 public class GenerationDAO {
+    private static final Logger logger = LoggerFactory.getLogger(GenerationDAO.class);
 
     public GenerationDAO()
     {
@@ -46,7 +50,7 @@ public class GenerationDAO {
             //        }
             //        catch (Exception e)
             //        {
-            //            e.printStackTrace();
+            //            logger.error("Exception occurred", e);
             //        }
             //        finally
             //        {
@@ -167,7 +171,7 @@ public class GenerationDAO {
 //            }
 //            catch (Exception e)
 //            {
-//                e.printStackTrace();
+//                logger.error("Exception occurred", e);
 //            }
 //            finally
 //            {
@@ -276,10 +280,10 @@ public class GenerationDAO {
 
         } catch (HttpException e) {
             System.err.println("Fatal protocol violation: " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Exception occurred", e);
         } catch (IOException e) {
             System.err.println("Fatal transport error: " + e.getMessage());
-            e.printStackTrace();
+            logger.error("Exception occurred", e);
         } finally {
             // Release the connection.
             method.releaseConnection();
@@ -299,7 +303,7 @@ public class GenerationDAO {
 //        }
 //        catch (UnknownHostException e)
 //        {
-//            e.printStackTrace();
+//            logger.error("Exception occurred", e);
 //        }
 //    }
 
@@ -346,13 +350,13 @@ public class GenerationDAO {
             saveStatement.setString(4, enddate);
             success = saveStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         } finally {
             if(connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    logger.error("Exception occurred", throwables);
                 }
             }
         }
@@ -379,12 +383,12 @@ public class GenerationDAO {
 //        catch (HttpException e)
 //        {
 //            System.err.println("Fatal protocol violation: " + e.getMessage());
-//            e.printStackTrace();
+//            logger.error("Exception occurred", e);
 //        }
 //        catch (IOException e)
 //        {
 //            System.err.println("Fatal transport error: " + e.getMessage());
-//            e.printStackTrace();
+//            logger.error("Exception occurred", e);
 //        }
 //        finally
 //        {

@@ -1,5 +1,8 @@
 package utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,12 +14,13 @@ import java.sql.SQLException;
  * @author Joshua Brewer
  */
 public class PostgresConnectionUtil extends ConnectionUtils {
+    private static final Logger logger = LoggerFactory.getLogger(extends.class);
 
   static {
     try {
       DriverManager.registerDriver(new org.postgresql.Driver());
     } catch (SQLException throwables) {
-      throwables.printStackTrace();
+      logger.error("Exception occurred", throwables);
     }
   }
 

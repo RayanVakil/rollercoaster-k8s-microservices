@@ -1,5 +1,8 @@
 package servlets;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.gson.Gson;
 import dao.AttractionDAO;
 import models.Attraction;
@@ -29,6 +32,7 @@ import java.util.Map;
 
 public class AttractionsServlet extends HttpServlet
 {
+    private static final Logger logger = LoggerFactory.getLogger(AttractionsServlet.class);
     /**
      * This Method is the only method implemented by Customer for attractions.
      * This method takes an httpRequest and calls to the DAO for our Attractions.
@@ -74,12 +78,12 @@ public class AttractionsServlet extends HttpServlet
                 }
                 catch (NumberFormatException e)
                 {
-                    e.printStackTrace();
+                    logger.error("Exception occurred", e);
                 resp.setStatus(400);
                 }
                 catch (IOException e)
                 {
-                    e.printStackTrace();
+                    logger.error("Exception occurred", e);
                 resp.setStatus(400);
                 }
             }

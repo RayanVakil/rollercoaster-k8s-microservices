@@ -1,5 +1,8 @@
 package data;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import models.Attraction;
 import utils.ConnectionUtil;
 import java.sql.*;
@@ -22,7 +25,8 @@ import java.util.List;
  *
  */
 
-public class SQLDatabaseExtAttractions implements GenericDAO<Attraction, Integer>{//Start of SQLDatabaseExtAttractions Class
+public class SQLDatabaseExtAttractions implements GenericDAO<Attraction, Integer>{
+    private static final Logger logger = LoggerFactory.getLogger(SQLDatabaseExtAttractions.class);//Start of SQLDatabaseExtAttractions Class
 //Instance Variables
     private static ConnectionUtil connectionUtil;
 
@@ -69,7 +73,7 @@ public class SQLDatabaseExtAttractions implements GenericDAO<Attraction, Integer
             }//End of while loop
         }//End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
         return results;
 
@@ -99,7 +103,7 @@ public class SQLDatabaseExtAttractions implements GenericDAO<Attraction, Integer
             addedRowCount = ps.executeUpdate();
         } //End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         return addedRowCount == 1;
@@ -141,7 +145,7 @@ public class SQLDatabaseExtAttractions implements GenericDAO<Attraction, Integer
             }//End of second try
         }//End of first try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         if(result.getStatus()==null){
@@ -152,7 +156,7 @@ public class SQLDatabaseExtAttractions implements GenericDAO<Attraction, Integer
                 result.getStatus();
             }//End of third try
             catch (Exception e){//Start of catch
-                e.printStackTrace();
+                logger.error("Exception occurred", e);
                 return null;
             }//End of catch
 
@@ -179,7 +183,7 @@ public class SQLDatabaseExtAttractions implements GenericDAO<Attraction, Integer
             deletedRowCount = ps.executeUpdate();
         }//End of try
         catch (SQLException e) {//Start of catch
-            e.printStackTrace();
+            logger.error("Exception occurred", e);
         }//End of catch
 
         return deletedRowCount != -1;

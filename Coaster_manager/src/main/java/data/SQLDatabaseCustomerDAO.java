@@ -1,5 +1,8 @@
 package data;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import models.Customer;
 import utils.ConnectionUtil;
 import utils.PostgresConnectionUtil;
@@ -33,6 +36,7 @@ import java.util.ArrayList;
 
 public class SQLDatabaseCustomerDAO
 {
+    private static final Logger logger = LoggerFactory.getLogger(serves.class);
     // Instance Variables
     private ConnectionUtil connectionUtil;
 
@@ -85,13 +89,13 @@ public class SQLDatabaseCustomerDAO
                 c = new Customer(customerid,firstname,lastname,email,password);
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         } finally {
             if(connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    logger.error("Exception occurred", throwables);
                 }
             }
         }
@@ -127,13 +131,13 @@ public class SQLDatabaseCustomerDAO
                 customerList.add(temp);
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         } finally {
             if(connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    logger.error("Exception occurred", throwables);
                 }
             }
         }
@@ -168,13 +172,13 @@ public class SQLDatabaseCustomerDAO
             saveStatement.executeUpdate();
             outputstatus = "Success";
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         } finally {
             if(connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    logger.error("Exception occurred", throwables);
                 }
             }
         }
@@ -207,13 +211,13 @@ public class SQLDatabaseCustomerDAO
             PreparedStatement updateStatement = connection.prepareStatement(sql);
             updateStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         } finally {
             if(connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    logger.error("Exception occurred", throwables);
                 }
             }
         }

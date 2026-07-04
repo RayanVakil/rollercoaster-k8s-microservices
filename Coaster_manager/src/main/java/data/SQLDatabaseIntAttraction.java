@@ -1,5 +1,8 @@
 package data;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import models.Attraction;
 import utils.ConnectionUtil;
 import utils.PostgresConnectionUtil;
@@ -24,7 +27,8 @@ import java.util.List;
  *  @author
  *  @version 11 May 2020
  */
-public class SQLDatabaseIntAttraction implements GenericDAO<Attraction,Integer> {//Start of SQLDatabaseAttraction
+public class SQLDatabaseIntAttraction implements GenericDAO<Attraction,Integer> {
+    private static final Logger logger = LoggerFactory.getLogger(SQLDatabaseIntAttraction.class);//Start of SQLDatabaseAttraction
 //Instance Variables
     private static ConnectionUtil connectionUtil;
 
@@ -72,7 +76,7 @@ public class SQLDatabaseIntAttraction implements GenericDAO<Attraction,Integer> 
             }//End of while loop
         }//End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         return results;
@@ -104,7 +108,7 @@ public class SQLDatabaseIntAttraction implements GenericDAO<Attraction,Integer> 
             addedRowCount = ps.executeUpdate();
         } //End of try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         return addedRowCount == 1;
@@ -146,11 +150,11 @@ public class SQLDatabaseIntAttraction implements GenericDAO<Attraction,Integer> 
             }//End of second try
             catch (Exception e)
             {
-                e.printStackTrace();
+                logger.error("Exception occurred", e);
             }
         }//End of first try
         catch (SQLException throwables) {//Start of catch
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         }//End of catch
 
         if(result.getStatus() == (null)){//Start of second if statement
@@ -162,7 +166,7 @@ public class SQLDatabaseIntAttraction implements GenericDAO<Attraction,Integer> 
            }//End of third try
            catch (Exception e){//Start of catch
                result.setStatus("Operational");
-               e.printStackTrace();
+               logger.error("Exception occurred", e);
                return null;
            }//End of catch
 
@@ -190,7 +194,7 @@ public class SQLDatabaseIntAttraction implements GenericDAO<Attraction,Integer> 
             deletedRowCount = ps.executeUpdate();
         }//End of try
         catch (SQLException e) {//Start of catch
-            e.printStackTrace();
+            logger.error("Exception occurred", e);
         }//End of catch
 
         return deletedRowCount != -1;

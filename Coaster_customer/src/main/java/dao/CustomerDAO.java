@@ -1,5 +1,8 @@
 package dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import models.Customer;
 import utils.ConnectionUtils;
 import utils.PostgresConnectionUtil;
@@ -33,6 +36,7 @@ import java.util.ArrayList;
  */
 
 public class CustomerDAO implements DAO<Customer, String> {
+    private static final Logger logger = LoggerFactory.getLogger(serves.class);
     // Instance Variables
     private ConnectionUtils connectionUtil;
 
@@ -83,13 +87,13 @@ public class CustomerDAO implements DAO<Customer, String> {
                 c = new Customer(customerid,firstname,lastname,email,password);
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         } finally {
             if(connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    logger.error("Exception occurred", throwables);
                 }
             }
         }
@@ -125,13 +129,13 @@ public class CustomerDAO implements DAO<Customer, String> {
                 customerList.add(temp);
             }
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         } finally {
             if(connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    logger.error("Exception occurred", throwables);
                 }
             }
         }
@@ -166,13 +170,13 @@ public class CustomerDAO implements DAO<Customer, String> {
             saveStatement.executeUpdate();
             outputstatus = "Success";
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         } finally {
             if(connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    logger.error("Exception occurred", throwables);
                 }
             }
         }
@@ -205,13 +209,13 @@ public class CustomerDAO implements DAO<Customer, String> {
             PreparedStatement updateStatement = connection.prepareStatement(sql);
             updateStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            logger.error("Exception occurred", throwables);
         } finally {
             if(connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    logger.error("Exception occurred", throwables);
                 }
             }
         }
