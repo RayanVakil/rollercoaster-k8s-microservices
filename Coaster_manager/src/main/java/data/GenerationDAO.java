@@ -9,12 +9,11 @@ import models.Customer;
 import models.Employee;
 import utils.PostgresConnectionUtil;
 import java.io.*;
-import org.apache.commons.httpclient.DefaultHttpMethodRetryHandler;
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.commons.httpclient.params.HttpMethodParams;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
 import java.lang.reflect.Array;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -243,20 +242,22 @@ public class GenerationDAO {
     public String indicativeFoul()
     {
         String url = "https://randomuser.me/api/";
-        HttpClient client = new HttpClient();
-        GetMethod method = new GetMethod(url);
-        method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
-                new DefaultHttpMethodRetryHandler(3, false));
+        HttpClient client = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(10))
+                .build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
         String item = "";
         String item1 = "";
         String item2 = "";
         try {
-            int statusCode = client.executeMethod(method);
-            if (statusCode != HttpStatus.SC_OK) {
-                System.err.println("Method failed: " + method.getStatusLine());
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() != 200) {
+                System.err.println("Method failed: " + response.statusCode());
             }
-            byte[] responseBody = method.getResponseBody();
-            String rezzy = new String(responseBody);
+            String rezzy = response.body();
             String[] stack = rezzy.split("\".\"");
             int holder = 1;
             for (String i : stack)
@@ -278,15 +279,9 @@ public class GenerationDAO {
             }
             if ((item.trim() == null) || (item2.trim() == null) || (item1.trim() ==null)) return null;
 
-        } catch (HttpException e) {
-            System.err.println("Fatal protocol violation: " + e.getMessage());
-            logger.error("Exception occurred", e);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.println("Fatal transport error: " + e.getMessage());
             logger.error("Exception occurred", e);
-        } finally {
-            // Release the connection.
-            method.releaseConnection();
         }
         if ((item.trim() == "") || (item2.trim() == "") || (item1.trim() == "")) return null;
         return item.trim()+"!"+item2.trim()+"!"+item1.trim();

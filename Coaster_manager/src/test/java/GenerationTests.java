@@ -10,15 +10,18 @@
 import data.GenerationDAO;
 import data.SQLDatabaseCustomerDAO;
 import models.Customer;
-import org.apache.commons.httpclient.*;
-import org.apache.commons.httpclient.methods.*;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
 import org.junit.Test;
 import java.time.LocalDateTime;
 
 import java.io.*;
 
 
-import org.apache.commons.httpclient.params.HttpMethodParams;
+
 import utils.PostgresConnectionUtil;
 
 @org.junit.Ignore
@@ -54,30 +57,21 @@ public class GenerationTests {
         // Fake example transaction ID: 3YC00XQKNVMZ
         String url = "https://randomuser.me/api/";
 
-        // Create an instance of HttpClient.
-        HttpClient client = new HttpClient();
-
-        // Create a method instance.
-        GetMethod method = new GetMethod(url);
-
-        // Provide custom retry handler is necessary
-        method.getParams().setParameter(HttpMethodParams.RETRY_HANDLER,
-                new DefaultHttpMethodRetryHandler(3, false));
-
+        HttpClient client = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(10))
+                .build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .GET()
+                .build();
         try
         {
-            // Execute the method.
-            int statusCode = client.executeMethod(method);
-
-            if (statusCode != HttpStatus.SC_OK)
-            {
-                System.err.println("Method failed: " + method.getStatusLine());
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() != 200) {
+                System.err.println("Method failed: " + response.statusCode());
             }
 
-
-            // Read the response body.
-            byte[] responseBody = method.getResponseBody();
-            String rezzy = new String(responseBody);
+            String rezzy = response.body();
             String[] stack = rezzy.split("\".\"");
             int holder = 1;
             String item = "";
@@ -107,16 +101,9 @@ public class GenerationTests {
             System.out.println("Last Name:  "+item2);
             System.out.println("email:  "+item1);
 
-
-        } catch (HttpException e) {
-            System.err.println("Fatal protocol violation: " + e.getMessage());
-            logger.error("Exception occurred", e);
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.println("Fatal transport error: " + e.getMessage());
             logger.error("Exception occurred", e);
-        } finally {
-            // Release the connection.
-            method.releaseConnection();
         }
     }
 
