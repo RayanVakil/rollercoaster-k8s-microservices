@@ -36,7 +36,7 @@ import java.util.ArrayList;
 
 public class SQLDatabaseCustomerDAO
 {
-    private static final Logger logger = LoggerFactory.getLogger(serves.class);
+    private static final Logger logger = LoggerFactory.getLogger(SQLDatabaseCustomerDAO.class);
     // Instance Variables
     private ConnectionUtil connectionUtil;
 

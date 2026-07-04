@@ -36,7 +36,7 @@ import utils.PostgresConnectionUtil;
  */
 
 public class TicketDAO implements DAO<Ticket, Integer> {
-    private static final Logger logger = LoggerFactory.getLogger(serves.class);
+    private static final Logger logger = LoggerFactory.getLogger(TicketDAO.class);
     // Instance Variables
     private ConnectionUtils connectionUtil;
 

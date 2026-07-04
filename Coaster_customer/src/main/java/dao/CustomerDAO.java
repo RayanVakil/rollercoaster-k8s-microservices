@@ -36,7 +36,7 @@ import java.util.ArrayList;
  */
 
 public class CustomerDAO implements DAO<Customer, String> {
-    private static final Logger logger = LoggerFactory.getLogger(serves.class);
+    private static final Logger logger = LoggerFactory.getLogger(CustomerDAO.class);
     // Instance Variables
     private ConnectionUtils connectionUtil;
 

@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @author Joshua Brewer
  */
 public class PostgresConnectionUtil extends ConnectionUtils {
-    private static final Logger logger = LoggerFactory.getLogger(extends.class);
+    private static final Logger logger = LoggerFactory.getLogger(PostgresConnectionUtil.class);
 
   static {
     try {

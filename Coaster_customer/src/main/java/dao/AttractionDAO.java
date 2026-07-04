@@ -33,7 +33,7 @@ import java.util.List;
  *  @version 19 May 2020
  */
 public class AttractionDAO implements DAO<Attraction,Integer> {
-    private static final Logger logger = LoggerFactory.getLogger(to.class);//Start of AttractionDAO
+    private static final Logger logger = LoggerFactory.getLogger(AttractionDAO.class);//Start of AttractionDAO
     //Instance Variables
     private static ConnectionUtils connectionUtil;
 
